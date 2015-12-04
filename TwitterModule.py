@@ -102,7 +102,7 @@ def tweets_to_word_counter(tweets, normalize=False, lowercase=True):
     """
     word_counter = util.Counter()
     for tweet in tweets:
-        word_counter += string_to_nonstopword_counter(tweet.GetText(), lowercase)
+        word_counter += string_to_nonstopword_counter(tweet.GetText())
     if normalize:
         word_counter.normalize()
     return word_counter
@@ -127,11 +127,23 @@ def string_to_nonstopword_list(text):
     chars_to_remove.remove('@')
     chars_to_remove = ''.join(chars_to_remove)
     words = [word.strip(chars_to_remove) for word in words]
+    # remove empty strings:
+    words = [word for word in words if word]
     # remove stopwords:
     words = filter(lambda w: w.lower() not in STOP_WORDS, words)
     # remove hyperlinks:
     words = filter(lambda w: not (len(w) > 7 and w[0:9] == 'https://'), words)
-    return words
+    # remove non ascii characters:
+    to_return = []
+    for word in words:
+        valid = True
+        for char in word:
+            if char not in string.printable:
+                valid = False
+                break
+        if valid:
+            to_return.append(word)
+    return to_return
 
 
 def string_to_nonstopword_counter(text, lowercase=True):
@@ -163,8 +175,8 @@ def get_user_tweets(username, max_searches=5, override_cache=False):
             be downloaded for.
         max_searches: The maximum number of API searches that will be
             executed for the given user. Default value is 5 searches.
-            100 tweets can be obtained per API search, so by default
-            a maximum of 500 tweets will be returned.
+            200 tweets can be obtained per API search, so by default
+            a maximum of 1000 tweets will be returned.
         override_cache: Whether to execute a search even if there is
             already a cached result for the specifed Twitter user.
             Defaults to False.
@@ -209,8 +221,19 @@ def _get_user_tweets_aux(username, max_tweet_id):
                                         max_id=max_tweet_id - 1)
     return search_result
 
-
-
+def split_words_hashtags_usermentions(word_counter):
+    """Splits all words into words, hashtags, and usermentions counters."""
+    pure_word_counter = util.Counter()
+    hashtag_counter = util.Counter()
+    usermentions_counter = util.Counter()
+    for word in word_counter:
+        if word[0] == '#':
+            hashtag_counter[word] = word_counter[word]
+        elif word[0] == '@':
+            usermentions_counter[word] = word_counter[word]
+        else:
+            pure_word_counter[word] = word_counter[word]
+    return pure_word_counter, hashtag_counter, usermentions_counter
 
 
 
