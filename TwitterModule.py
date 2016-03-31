@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from geopy.geocoders import Nominatim
 import util
 import twitter
 import json
