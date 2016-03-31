@@ -1,14 +1,14 @@
 from collections import defaultdict
 from copy import deepcopy
 from geopy.geocoders import Nominatim
-import util
+import Util
 import twitter
 import json
 import time
 import string
 import stop_words
 
-
+geolocator = Nominatim()
 STOP_WORDS = stop_words.get_stop_words('english')
 
 api = twitter.Api(consumer_key='b170h2arKC4VoITriN5jIjFRN',
@@ -16,8 +16,8 @@ api = twitter.Api(consumer_key='b170h2arKC4VoITriN5jIjFRN',
                   access_token_key='3842613073-L7vq82QRYRGCbO1kzN9bYfjfbbV7kOpWWLYnBGG',
                   access_token_secret='FU6AJWG4iDHfzQWhjKB1r3SIwoyzTcgFe0LjyNfq8r6aR')
 
-cached_query_results = {}
-cached_user_results = {}
+global cached_query_results = {}
+global cached_user_results = {}
 
 
 def search_tweets(query, max_searches=5, override_cache=False):
@@ -36,6 +36,10 @@ def search_tweets(query, max_searches=5, override_cache=False):
     Returns:
         A list of tweet objects matching the query with most recent
         tweets first.
+
+    Raises:
+        UserWarning: If override_cache is set to False and result for
+            input query has already been cached.
     """
     if query in cached_query_results and override_cache is not False:
         raise UserWarning('input query {0} is already in '
@@ -71,18 +75,46 @@ def _search_tweets_aux(query, max_tweet_id):
     return search_result
 
 
+def get_coordinate_list(tweets):
+    """Gets list of (longitude, latitude) tuples for tweets in list.
+
+    Args:
+       tweets: List of tweet objects to extract geo coordinates from.
+           Will ignore tweets in list for which geo coordinates cannot
+           be extracted.
+
+    Returns:
+        List of (longitude, latitude) tuples for tweets in list.
+    """
+    coord_list = []
+    for tweet in tweets:
+        coords = get_coordinates(tweet)
+        if coords:
+            coord_list.append(coords)
+    return coord_list
+
 def get_coordinates(tweet):
-    """Gets longitude and lattitude of tweet.
+    """Gets longitude and latitude of tweet.
 
     Args:
         tweet: The tweet object to extract geo coordinates from.
 
     Returns:
-        Tuple of (longitude, lattitude) for the input tweet. Returns
+        Tuple of (longitude, latitude) for the input tweet. Returns
         False if unable to extract geo coordinates for tweet.
     """
-    
-
+    # try to get tweet geo coordinates directly if available
+    coordinates = tweet.GetCoordinates()
+    if coordinates:
+        return coordinates
+    # otherwise parase geo coordinates form user location if available
+    location = tweet.user.location
+    if location:
+        coordinates = geolocator.geocode(location)
+        if coordinates:
+            return coordinates.longitude, coordinates.latitude
+    # not able to extract geo coordinates, so return False
+    return False
 
 
 def no_duplicate_tweets(tweets):
