@@ -1,0 +1,77 @@
+dir(tweet):
+['AsDict', 'AsJsonString', 'GetContributors', 'GetCoordinates', 'GetCreatedAt', 'GetCreatedAtInSeconds', 'GetCurrent_user_retweet', 'GetFavoriteCount', 'GetFavorited', 'GetGeo', 'GetId', 'GetIdStr', 'GetInReplyToScreenName', 'GetInReplyToStatusId', 'GetInReplyToUserId', 'GetLang', 'GetLocation', 'GetNow', 'GetPlace', 'GetPossibly_sensitive', 'GetRelativeCreatedAt', 'GetRetweetCount', 'GetRetweeted', 'GetRetweeted_status', 'GetScopes', 'GetSource', 'GetText', 'GetTruncated', 'GetUser', 'GetWithheld_copyright', 'GetWithheld_in_countries', 'GetWithheld_scope', 'NewFromJsonDict', 'SetContributors', 'SetCoordinates', 'SetCreatedAt', 'SetCurrent_user_retweet', 'SetFavoriteCount', 'SetFavorited', 'SetGeo', 'SetId', 'SetIdStr', 'SetInReplyToScreenName', 'SetInReplyToStatusId', 'SetInReplyToUserId', 'SetLocation', 'SetNow', 'SetPlace', 'SetPossibly_sensitive', 'SetRetweetCount', 'SetRetweeted', 'SetRetweeted_status', 'SetScopes', 'SetSource', 'SetText', 'SetTruncated', 'SetUser', 'SetWithheld_copyright', 'SetWithheld_in_countries', 'SetWithheld_scope', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_contributors', '_coordinates', '_created_at', '_current_user_retweet', '_favorite_count', '_favorited', '_geo', '_id', '_id_str', '_in_reply_to_screen_name', '_in_reply_to_status_id', '_in_reply_to_user_id', '_location', '_now', '_place', '_possibly_sensitive', '_retweet_count', '_retweeted', '_retweeted_status', '_scopes', '_source', '_text', '_truncated', '_user', '_withheld_copyright', '_withheld_in_countries', '_withheld_scope', 'contributors', 'coordinates', 'created_at', 'created_at_in_seconds', 'current_user_retweet', 'favorite_count', 'favorited', 'geo', 'hashtags', 'id', 'id_str', 'in_reply_to_screen_name', 'in_reply_to_status_id', 'in_reply_to_user_id', 'lang', 'location', 'media', 'now', 'place', 'possibly_sensitive', 'relative_created_at', 'retweet_count', 'retweeted', 'retweeted_status', 'scopes', 'source', 'text', 'truncated', 'urls', 'user', 'user_mentions', 'withheld_copyright', 'withheld_in_countries', 'withheld_scope']
+ImportantMethods:
+tweet.GetText()
+tweet.GetUser() # returns a twitter user object
+tweet.GetId()
+tweet.GetIdStr() # this appears not to work for some tweets
+tweet.GetCreatedAt() # returns a nice UTC unicode string of the creation date
+tweet.GetCreatedAtInSeconds() # Returns tweet creation time, in seconds since the epoch
+tweet.GetRetweetCount()
+tweet.GetFavoriteCount()
+tweet.urls # list of twitter.url.URL objects
+tweet.retweeted # I think this tells you whether this tweet is a retweet
+
+tweet_url_object:
+tweeturl.expanded_url
+tweeturl.url
+
+dir(tweetuser):
+['AsDict', 'AsJsonString', 'GetContributorsEnabled', 'GetCreatedAt', 'GetDescription', 'GetFavouritesCount', 'GetFollowersCount', 'GetFriendsCount', 'GetGeoEnabled', 'GetId', 'GetLang', 'GetListedCount', 'GetLocation', 'GetName', 'GetNotifications', 'GetProfileBackgroundColor', 'GetProfileBackgroundImageUrl', 'GetProfileBackgroundTile', 'GetProfileBannerUrl', 'GetProfileImageUrl', 'GetProfileLinkColor', 'GetProfileSidebarFillColor', 'GetProfileTextColor', 'GetProtected', 'GetScreenName', 'GetStatus', 'GetStatusesCount', 'GetTimeZone', 'GetUrl', 'GetUtcOffset', 'GetVerified', 'NewFromJsonDict', 'SetContributorsEnabled', 'SetCreatedAt', 'SetDescription', 'SetFavouritesCount', 'SetFollowersCount', 'SetFriendsCount', 'SetGeoEnabled', 'SetId', 'SetLang', 'SetListedCount', 'SetLocation', 'SetName', 'SetNotifications', 'SetProfileBackgroundColor', 'SetProfileBackgroundImageUrl', 'SetProfileBackgroundTile', 'SetProfileBannerUrl', 'SetProfileImageUrl', 'SetProfileLinkColor', 'SetProfileSidebarFillColor', 'SetProfileTextColor', 'SetProtected', 'SetScreenName', 'SetStatus', 'SetStatusesCount', 'SetTimeZone', 'SetUrl', 'SetUtcOffset', 'SetVerified', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_contributors_enabled', '_created_at', '_description', '_favourites_count', '_followers_count', '_friends_count', '_geo_enabled', '_id', '_lang', '_listed_count', '_location', '_name', '_notifications', '_profile_background_color', '_profile_background_image_url', '_profile_background_tile', '_profile_banner_url', '_profile_image_url', '_profile_link_color', '_profile_sidebar_fill_color', '_profile_text_color', '_protected', '_screen_name', '_status', '_statuses_count', '_time_zone', '_url', '_utc_offset', '_verified', 'contributors_enabled', 'created_at', 'default_profile', 'default_profile_image', 'description', 'favourites_count', 'followers_count', 'friends_count', 'geo_enabled', 'id', 'lang', 'listed_count', 'location', 'name', 'notifications', 'profile_background_color', 'profile_background_image_url', 'profile_background_tile', 'profile_banner_url', 'profile_image_url', 'profile_link_color', 'profile_sidebar_fill_color', 'profile_text_color', 'protected', 'screen_name', 'status', 'statuses_count', 'time_zone', 'url', 'utc_offset', 'verified']
+useful methods:
+tweetuser.GetLocation() # e.g. might return u'Los Angeles, CA'
+tweetuser.GetDescription()
+tweetuser.GetScreenName()
+tweetuser.GetStatusesCount() # I think thi sreturns the number of tweets they've tweeted
+tweetuser.GetFollowersCount()
+tweetuser.GetFriendsCount()
+
+dir(twitter.api)
+['ClearCredentials', 'CreateFavorite', 'CreateFriendship', 'CreateList', 'CreateListsMember', 'CreateSubscription', 'DEFAULT_CACHE_TIMEOUT', 'DestroyBlock', 'DestroyDirectMessage', 'DestroyFavorite', 'DestroyFriendship', 'DestroyList', 'DestroyListsMember', 'DestroyStatus', 'DestroySubscription', 'GetAverageSleepTime', 'GetBlocks', 'GetDirectMessages', 'GetFavorites', 'GetFollowerIDs', 'GetFollowers', 'GetFollowersPaged', 'GetFriendIDs', 'GetFriends', 'GetHelpConfiguration', 'GetHomeTimeline', 'GetListMembers', 'GetListTimeline', 'GetLists', 'GetListsList', 'GetMentions', 'GetRateLimitStatus', 'GetReplies', 'GetRetweeters', 'GetRetweets', 'GetRetweetsOfMe', 'GetSearch', 'GetSentDirectMessages', 'GetShortUrlLength', 'GetSleepTime', 'GetStatus', 'GetStatusOembed', 'GetStreamFilter', 'GetStreamSample', 'GetSubscriptions', 'GetTrendsCurrent', 'GetTrendsWoeid', 'GetUser', 'GetUserRetweets', 'GetUserStream', 'GetUserTimeline', 'GetUsersSearch', 'LookupFriendship', 'PostDirectMessage', 'PostMedia', 'PostMultipleMedia', 'PostRetweet', 'PostUpdate', 'PostUpdates', 'SetCache', 'SetCacheTimeout', 'SetCredentials', 'SetSource', 'SetUrllib', 'SetUserAgent', 'SetXTwitterHeaders', 'ShowSubscription', 'UpdateBanner', 'UpdateProfile', 'UsersLookup', 'VerifyCredentials', '_API_REALM', '_Api__auth', '_BuildUrl', '_CheckForTwitterError', '_DecompressGzippedResponse', '_Encode', '_EncodeParameters', '_EncodePostData', '_InitializeDefaultParameters', '_InitializeRequestHeaders', '_InitializeUserAgent', '_ParseAndCheckTwitter', '_RequestStream', '_RequestUrl', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_access_token_key', '_access_token_secret', '_cache', '_cache_timeout', '_calculate_status_length', '_config', '_consumer_key', '_consumer_secret', '_debugHTTP', '_default_params', '_input_encoding', '_request_headers', '_shortlink_size', '_timeout', '_urllib', '_use_gzip', 'base_url', 'stream_url', 'upload_url']
+Useful Methods:
+api.GetUserTimeline() # Get all tweets from a single user
+api.GetSearch(term='QUERY_PHRASE', lang='en'count=100) # search by hashtag or phrase
+GetSearch(self, term=None, geocode=None, since_id=None, max_id=None, until=None, count=15, lang=None, locale=None, result_type='mixed', include_entities=None) method of twitter.api.Api instance
+    Return twitter search results for a given term.
+
+    Args:
+      term:
+        Term to search by. Optional if you include geocode.
+      since_id:
+        Returns results with an ID greater than (that is, more recent
+        than) the specified ID. There are limits to the number of
+        Tweets which can be accessed through the API. If the limit of
+        Tweets has occurred since the since_id, the since_id will be
+        forced to the oldest ID available. [Optional]
+      max_id:
+        Returns only statuses with an ID less than (that is, older
+        than) or equal to the specified ID. [Optional]
+      until:
+        Returns tweets generated before the given date. Date should be
+        formatted as YYYY-MM-DD. [Optional]
+      geocode:
+        Geolocation information in the form (latitude, longitude, radius)
+        [Optional]
+      count:
+        Number of results to return.  Default is 15 [Optional]
+      lang:
+        Language for results as ISO 639-1 code.  Default is None (all languages)
+        [Optional]
+      locale:
+        Language of the search query. Currently only 'ja' is effective. This is
+        intended for language-specific consumers and the default should work in
+        the majority of cases.
+      result_type:
+        Type of result which should be returned.  Default is "mixed".  Other
+        valid options are "recent" and "popular". [Optional]
+      include_entities:
+        If True, each tweet will include a node called "entities,".
+        This node offers a variety of metadata about the tweet in a
+        discrete structure, including: user_mentions, urls, and
+        hashtags. [Optional]
+
+    Returns:
+      A sequence of twitter.Status instances, one for each message containing
+      the term
+
+api.GetSleepTime('/search/tweets') # I think this is what you want to use

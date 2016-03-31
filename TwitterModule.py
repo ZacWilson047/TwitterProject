@@ -59,6 +59,7 @@ def search_tweets(query, max_searches=5, override_cache=False):
     cached_query_results[query] = result
     return result
 
+
 def _search_tweets_aux(query, max_tweet_id):
     """Auxiliary helper function for search_tweets."""
     remaining_timeout = api.GetSleepTime('/search/tweets')
@@ -68,6 +69,20 @@ def _search_tweets_aux(query, max_tweet_id):
         time.sleep(remaining_timeout + 1)
     search_result = api.GetSearch(term=query, count=100, max_id=max_tweet_id - 1)
     return search_result
+
+
+def get_coordinates(tweet):
+    """Gets longitude and lattitude of tweet.
+
+    Args:
+        tweet: The tweet object to extract geo coordinates from.
+
+    Returns:
+        Tuple of (longitude, lattitude) for the input tweet. Returns
+        False if unable to extract geo coordinates for tweet.
+    """
+    
+
 
 
 def no_duplicate_tweets(tweets):
